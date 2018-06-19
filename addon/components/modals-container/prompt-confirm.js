@@ -1,6 +1,5 @@
 import PromptModal from './prompt';
 import {computed, get} from '@ember/object';
-import layout from '../../templates/components/modals-container/prompt';
 
 /**
  * Prompt-confirm-modal
@@ -10,7 +9,6 @@ import layout from '../../templates/components/modals-container/prompt';
  * @extends Components.PromptModal
  */
 export default PromptModal.extend({
-  layout,
 
   /**
    * @property confirmDisabled

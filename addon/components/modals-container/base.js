@@ -1,6 +1,5 @@
 import Component from '@ember/component';
 import {get} from '@ember/object';
-import layout from '../../templates/components/modals-container/base';
 
 /**
  * Base Components for modals. All of them extends this one
@@ -10,7 +9,6 @@ import layout from '../../templates/components/modals-container/base';
  * @extends Ember.Component
  */
 export default Component.extend({
-  layout,
 
   /**
    * @property modalIsOpened

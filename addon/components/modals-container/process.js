@@ -1,5 +1,4 @@
 import Base from './base';
-import layout from '../../templates/components/modals-container/process';
 import {get} from '@ember/object';
 
 /**
@@ -10,8 +9,6 @@ import {get} from '@ember/object';
  * @extends Components.BaseModal
  */
 export default Base.extend({
-  layout,
-
   didInsertElement() {
     const process = get(this, 'options.process');
     if (process) {

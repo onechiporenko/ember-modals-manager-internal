@@ -1,5 +1,4 @@
 import BaseModal from './base';
-import layout from '../../templates/components/modals-container/alert';
 
 /**
  * Alert-modal
@@ -9,5 +8,5 @@ import layout from '../../templates/components/modals-container/alert';
  * @extends Components.BaseModal
  */
 export default BaseModal.extend({
-  layout
+
 });

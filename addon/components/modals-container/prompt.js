@@ -1,7 +1,6 @@
 import BaseModal from './base';
 import {computed, get, set} from '@ember/object';
 import {isEmpty} from '@ember/utils';
-import layout from '../../templates/components/modals-container/prompt';
 
 /**
  * Prompt-modal
@@ -11,8 +10,6 @@ import layout from '../../templates/components/modals-container/prompt';
  * @extends Components.BaseModal
  */
 export default BaseModal.extend({
-  layout,
-
   /**
    * @property promptValue
    * @type string

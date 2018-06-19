@@ -1,4 +1,3 @@
-import layout from '../../templates/components/modals-container/progress';
 import Base from './base';
 import {computed, get, set} from '@ember/object';
 import {alias} from '@ember/object/computed';
@@ -14,8 +13,6 @@ import {run} from '@ember/runloop';
  * @extends Components.BaseModal
  */
 export default Base.extend({
-
-  layout,
 
   /**
    * Number of fulfilled promises
