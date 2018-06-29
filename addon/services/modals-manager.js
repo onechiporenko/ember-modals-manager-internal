@@ -45,7 +45,8 @@ export default Service.extend({
       body: 'Default Body',
       footer: '',
       confirm: 'Yes',
-      decline: 'No'
+      decline: 'No',
+      cancel: 'Cancel'
     };
   }),
 
