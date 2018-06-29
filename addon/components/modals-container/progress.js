@@ -38,6 +38,32 @@ export default Base.extend({
   promisesCount: 0,
 
   /**
+   * @property canceled
+   * @type boolean
+   * @default false
+   */
+  canceled: false,
+
+  /**
+   * @property settled
+   * @type boolean
+   * @default false
+   * @private
+   * @readonly
+   */
+  settled: alias('options.settled'),
+
+  /**
+   * @property errors
+   * @type array
+   * @default []
+   * @private
+   */
+  errors: computed(function () {
+    return A([]);
+  }),
+
+  /**
    * @property results
    * @type array
    * @default []
@@ -74,6 +100,12 @@ export default Base.extend({
     return done / promisesCount * 100;
   }),
 
+  actions: {
+    cancelProcess() {
+      set(this, 'canceled', true);
+    }
+  },
+
   didInsertElement() {
     const promises = get(this, 'promises');
     set(this, 'promisesCount', get(promises, 'length'));
@@ -88,26 +120,46 @@ export default Base.extend({
    * @private
    */
   next(promiseFactory) {
-    promiseFactory()
+    if (get(this, 'canceled')) {
+      return this._complete();
+    }
+    return promiseFactory()
       .then(result => {
-        run(() => {
-          get(this, 'results').pushObject(result);
-          this.incrementProperty('done');
-        });
-        const promises = get(this, 'promises');
-        if (promises.length) {
-          this.next(promises.shift());
-        }
-        else {
-          // wait for last "tick" animation
-          later(() => this.send('confirm', get(this, 'results')), 500);
-        }
+        this._next(result);
         return result;
       })
       .catch(error => {
-        this.send('decline', [get(this, 'results'), error]);
+        if (get(this, 'settled')) {
+          get(this, 'errors').pushObject(error);
+          this._next();
+        }
+        else {
+          this.send('decline', [get(this, 'results'), error]);
+        }
         return error;
       });
+  },
+
+  _next(result) {
+    run(() => {
+      get(this, 'results').pushObject(result);
+      this.incrementProperty('done');
+    });
+    const promises = get(this, 'promises');
+    if (promises.length) {
+      this.next(promises.shift());
+    }
+    else {
+      // wait for last "tick" animation
+      this._complete();
+    }
+  },
+
+  _complete() {
+    const settled = get(this, 'settled');
+    const results = get(this, 'results');
+    const errors = get(this, 'errors');
+    later(() => this.send('confirm', settled ? [results, errors] : results), 500);
   }
 
 });
