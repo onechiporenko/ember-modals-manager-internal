@@ -142,7 +142,9 @@ export default Base.extend({
 
   _next(result) {
     run(() => {
-      get(this, 'results').pushObject(result);
+      if (arguments.length === 1) {
+        get(this, 'results').pushObject(result);
+      }
       this.incrementProperty('done');
     });
     const promises = get(this, 'promises');
