@@ -101,7 +101,7 @@ export default Base.extend({
   }),
 
   actions: {
-    cancelProcess() {
+    cancel() {
       set(this, 'canceled', true);
     }
   },
