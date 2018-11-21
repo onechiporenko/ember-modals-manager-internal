@@ -68,8 +68,6 @@ export default Service.extend({
   componentName: null,
 
   /**
-   * Shows provided modal
-   *
    * @method show
    * @param {string} componentName
    * @param {object} options

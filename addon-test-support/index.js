@@ -1,11 +1,10 @@
 import {click, find, fillIn} from '@ember/test-helpers';
-import $ from 'jquery';
 
 export function getConfirmButtonState(selector) {
   return function (assert, state) {
     state ?
-      assert.ok($(selector).is(':disabled')) :
-      assert.ok($(selector).is(':enabled'));
+      assert.ok(document.querySelector(selector).disabled) :
+      assert.ok(!document.querySelector(selector).disabled);
   }
 }
 
