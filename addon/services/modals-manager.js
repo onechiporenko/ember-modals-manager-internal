@@ -1,4 +1,4 @@
-import {computed, get, set} from '@ember/object';
+import {get, set} from '@ember/object';
 import {assert} from '@ember/debug';
 import Service from '@ember/service';
 import {isArray} from '@ember/array';
@@ -39,25 +39,27 @@ export default Service.extend({
    * @property defaultOptions
    * @type object
    */
-  defaultOptions: computed(function () {
-    return {
-      title: 'Default Title',
-      body: 'Default Body',
-      footer: '',
-      confirm: 'Yes',
-      decline: 'No',
-      cancel: 'Cancel'
-    };
-  }),
+  defaultOptions: null,
 
   /**
    * @property options
    * @type object
    * @private
    */
-  options: computed(function () {
-    return {};
-  }),
+  options: null,
+
+  init() {
+    set(this, 'defaultOptions', {
+      title: 'Default Title',
+      body: 'Default Body',
+      footer: '',
+      confirm: 'Yes',
+      decline: 'No',
+      cancel: 'Cancel'
+    });
+    set(this, 'options', {});
+    return this._super(...arguments);
+  },
 
   /**
    * @property componentName
