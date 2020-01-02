@@ -1,7 +1,8 @@
 import Component from '@ember/component';
+import {layout as templateLayout} from '@ember-decorators/component';
 import layout from '../templates/components/modals-container';
 import {inject as service} from '@ember/service';
-import {get} from '@ember/object';
+import {action, get} from '@ember/object';
 import {readOnly} from '@ember/object/computed';
 
 /**
@@ -17,8 +18,9 @@ import {readOnly} from '@ember/object/computed';
  * @namespace Components
  * @extends Ember.Component
  */
-export default Component.extend({
-  layout,
+export default
+@templateLayout(layout)
+class ModalsContainer extends Component{
 
   /**
    * @property modalsManager
@@ -26,7 +28,8 @@ export default Component.extend({
    * @protected
    * @readonly
    */
-  modalsManager: service(),
+  @service
+  modalsManager;
 
   /**
    * @property options
@@ -34,7 +37,8 @@ export default Component.extend({
    * @protected
    * @readonly
    */
-  options: readOnly('modalsManager.options'),
+  @readOnly('modalsManager.options')
+  options;
 
   /**
    * @property modalIsOpened
@@ -43,7 +47,8 @@ export default Component.extend({
    * @protected
    * @readonly
    */
-  modalIsOpened: readOnly('modalsManager.modalIsOpened'),
+  @readOnly('modalsManager.modalIsOpened')
+  modalIsOpened;
 
   /**
    * @property componentName
@@ -52,24 +57,22 @@ export default Component.extend({
    * @protected
    * @readonly
    */
-  componentName: readOnly('modalsManager.componentName'),
+  @readOnly('modalsManager.componentName')
+  componentName;
 
-  actions: {
-
-    /**
-     * @method actions.confirm
-     * @param {*} [v]
-     */
-    confirm(v) {
-      get(this, 'modalsManager').onConfirmClick(v);
-    },
-
-    /**
-     * @method actions.decline
-     * @param {*} [v]
-     */
-    decline(v) {
-      get(this, 'modalsManager').onDeclineClick(v);
-    }
+  /**
+   * @param {*} [v]
+   */
+  @action
+  confirm(v) {
+    get(this, 'modalsManager').onConfirmClick(v);
   }
-});
+
+  /**
+   * @param {*} [v]
+   */
+  @action
+  decline(v) {
+    get(this, 'modalsManager').onDeclineClick(v);
+  }
+}
