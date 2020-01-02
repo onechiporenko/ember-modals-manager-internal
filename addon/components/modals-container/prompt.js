@@ -1,5 +1,5 @@
 import BaseModal from './base';
-import {computed, get, set} from '@ember/object';
+import {action, computed, get, set} from '@ember/object';
 import {isEmpty} from '@ember/utils';
 
 /**
@@ -9,52 +9,52 @@ import {isEmpty} from '@ember/utils';
  * @namespace Components
  * @extends Components.BaseModal
  */
-export default BaseModal.extend({
+export default class PromptModal extends BaseModal {
   /**
    * @property promptValue
    * @type string
    * @default ''
-   * @private
+   * @protected
    * @readonly
    */
-  promptValue: '',
+  promptValue = '';
 
   /**
    * @property inputType
    * @type string
    * @default 'text'
-   * @private
+   * @protected
    * @readonly
    */
-  inputType: 'text',
+  inputType = 'text';
 
   /**
    * @property confirmDisabled
    * @type boolean
    * @default true
-   * @private
+   * @protected
    * @readonly
    */
-  confirmDisabled: computed('promptValue', 'options.disallowEmpty', function () {
+  @computed('promptValue', 'options.disallowEmpty')
+  get confirmDisabled () {
     return get(this, 'options.disallowEmpty') ? isEmpty(get(this, 'promptValue')) : false;
-  }),
-
-  actions: {
-
-    /**
-     * @method actions.confirm
-     */
-    confirm() {
-      this._super(get(this, 'promptValue'));
-    },
-
-    /**
-     * @method actions.updatePromptValue
-     * @param {*} val
-     */
-    updatePromptValue(val) {
-      set(this, 'promptValue', val);
-    }
   }
 
-});
+  /**
+   * @event confirm
+   */
+  @action
+  confirm() {
+    super.confirm(get(this, 'promptValue'));
+  }
+
+  /**
+   * @event updatePromptValue
+   * @param {*} val
+   */
+  @action
+  updatePromptValue(val) {
+    set(this, 'promptValue', val);
+  }
+
+}

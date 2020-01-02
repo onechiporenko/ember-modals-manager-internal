@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import {get} from '@ember/object';
+import {action, get} from '@ember/object';
 
 /**
  * Base Components for modals. All of them extends this one
@@ -8,52 +8,48 @@ import {get} from '@ember/object';
  * @namespace Components
  * @extends Ember.Component
  */
-export default Component.extend({
+export default class BaseModal extends Component {
 
   /**
    * @property modalIsOpened
    * @type boolean
    * @default false
-   * @private
+   * @protected
    * @readonly
    */
-  modalIsOpened: false,
+  modalIsOpened = false;
 
   /**
    * @property options
    * @type object
    * @default null
-   * @private
-   * @readonly
+   * @protected
    */
-  options: null,
+  options = null;
 
   /**
    * @event onConfirm
    */
-  onConfirm: null,
+  onConfirm = null;
 
   /**
    * @event onDecline
    */
-  onDecline: null,
+  onDecline = null;
 
-  actions: {
-
-    /**
-     * @method actions.confirm
-     * @param {*} [v]
-     */
-    confirm(v) {
-      get(this, 'onConfirm')(v);
-    },
-
-    /**
-     * @method actions.decline
-     * @param {*} [v]
-     */
-    decline(v) {
-      get(this, 'onDecline')(v);
-    }
+  /**
+   * @param {*} [v]
+   */
+  @action
+  confirm(v) {
+    get(this, 'onConfirm')(v);
   }
-});
+
+  /**
+   * @param {*} [v]
+   */
+  @action
+  decline(v) {
+    get(this, 'onDecline')(v);
+  }
+}

@@ -1,8 +1,8 @@
-{{#if modalIsOpened}}
+{{#if this.modalIsOpened}}
   {{component
-    componentName
-    modalIsOpened=modalIsOpened
-    options=options
+    @componentName
+    modalIsOpened=this.modalIsOpened
+    options=@options
     onConfirm=(action "confirm")
     onDecline=(action "decline")
   }}

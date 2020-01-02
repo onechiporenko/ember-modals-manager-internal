@@ -8,7 +8,7 @@ import {get} from '@ember/object';
  * @namespace Components
  * @extends Components.BaseModal
  */
-export default Base.extend({
+export default class ProcessModal extends Base {
   didInsertElement() {
     const process = get(this, 'options.process');
     if (process) {
@@ -17,4 +17,5 @@ export default Base.extend({
         .catch(e => this.send('decline', e));
     }
   }
-});
+}
+

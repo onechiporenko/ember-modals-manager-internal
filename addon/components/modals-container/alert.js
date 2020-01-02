@@ -7,6 +7,6 @@ import BaseModal from './base';
  * @namespace Components
  * @extends Components.BaseModal
  */
-export default BaseModal.extend({
+export default class AlertModal extends BaseModal {
 
-});
+}

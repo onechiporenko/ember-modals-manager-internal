@@ -15,23 +15,23 @@ import {defer} from 'rsvp';
  * @namespace Services
  * @extends Ember.Service
  */
-export default Service.extend({
+export default class ModalsManager extends Service {
 
   /**
    * @property modalIsOpened
    * @type boolean
    * @default false
-   * @private
+   * @protected
    */
-  modalIsOpened: false,
+  modalIsOpened = false;
 
   /**
    * @property modalDefer
    * @type RSVP.Defer
    * @default null
-   * @private
+   * @protected
    */
-  modalDefer: null,
+  modalDefer = null;
 
   /**
    * POJO with default options for all modals
@@ -39,14 +39,14 @@ export default Service.extend({
    * @property defaultOptions
    * @type object
    */
-  defaultOptions: null,
+  defaultOptions = null;
 
   /**
    * @property options
    * @type object
-   * @private
+   * @protected
    */
-  options: null,
+  options = null;
 
   init() {
     set(this, 'defaultOptions', {
@@ -58,8 +58,8 @@ export default Service.extend({
       cancel: 'Cancel'
     });
     set(this, 'options', {});
-    return this._super(...arguments);
-  },
+    return super.init(...arguments);
+  }
 
   /**
    * @property componentName
@@ -67,7 +67,7 @@ export default Service.extend({
    * @default null
    * @private
    */
-  componentName: null,
+  componentName = null;
 
   /**
    * @method show
@@ -85,7 +85,7 @@ export default Service.extend({
     const modalDefer = defer();
     set(this, 'modalDefer', modalDefer);
     return modalDefer.promise;
-  },
+  }
 
   /**
    * Shows `alert`-modal
@@ -96,7 +96,7 @@ export default Service.extend({
    */
   alert(options) {
     return this.show('modals-container/alert', options);
-  },
+  }
 
   /**
    * Shows `confirm`-modal
@@ -107,7 +107,7 @@ export default Service.extend({
    */
   confirm(options) {
     return this.show('modals-container/confirm', options);
-  },
+  }
 
   /**
    * Shows `prompt`-modal
@@ -118,7 +118,7 @@ export default Service.extend({
    */
   prompt(options) {
     return this.show('modals-container/prompt', options);
-  },
+  }
 
   /**
    * Shows `prompt-confirm`-modal
@@ -130,7 +130,7 @@ export default Service.extend({
   promptConfirm(options) {
     assert('"options.promptValue" must be defined and not empty', !!options.promptValue);
     return this.show('modals-container/prompt-confirm', options);
-  },
+  }
 
   /**
    * Show `check-confirm`-modal
@@ -141,7 +141,7 @@ export default Service.extend({
    */
   checkConfirm(options) {
     return this.show('modals-container/check-confirm', options);
-  },
+  }
 
   /**
    * Shows `progress`-modal. This modal doesn't have any controls and is auto-closed when progress is completed
@@ -153,7 +153,7 @@ export default Service.extend({
   progress(options) {
     assert('`options.promises` must be an array', options && isArray(options.promises));
     return this.show('modals-container/progress', options);
-  },
+  }
 
   /**
    * @method process
@@ -163,25 +163,25 @@ export default Service.extend({
   process(options) {
     assert('`options.process` must be defined', options && options.process);
     return this.show('modals-container/process', options);
-  },
+  }
 
   /**
    * @method onConfirmClick
-   * @private
+   * @protected
    */
   onConfirmClick(v) {
     set(this, 'modalIsOpened', false);
     get(this, 'modalDefer').resolve(v);
     set(this, 'options', {});
-  },
+  }
 
   /**
    * @method onDeclineClick
-   * @private
+   * @protected
    */
   onDeclineClick(v) {
     set(this, 'modalIsOpened', false);
     get(this, 'modalDefer').reject(v);
     set(this, 'options', {});
   }
-});
+}

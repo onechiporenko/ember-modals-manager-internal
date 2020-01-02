@@ -7,5 +7,5 @@ import BaseModal from './base';
  * @namespace Components
  * @extends Components.BaseModal
  */
-export default BaseModal.extend({
-});
+export default class ConfirmModal extends BaseModal {
+}

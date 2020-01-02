@@ -23,7 +23,7 @@ export default Component.extend({
   /**
    * @property modalsManager
    * @type Services.ModalsManager
-   * @private
+   * @protected
    * @readonly
    */
   modalsManager: service(),
@@ -31,7 +31,7 @@ export default Component.extend({
   /**
    * @property options
    * @type object
-   * @private
+   * @protected
    * @readonly
    */
   options: readOnly('modalsManager.options'),
@@ -40,7 +40,7 @@ export default Component.extend({
    * @property modalIsOpened
    * @type boolean
    * @default false
-   * @private
+   * @protected
    * @readonly
    */
   modalIsOpened: readOnly('modalsManager.modalIsOpened'),
@@ -49,7 +49,7 @@ export default Component.extend({
    * @property componentName
    * @type string
    * @default null
-   * @private
+   * @protected
    * @readonly
    */
   componentName: readOnly('modalsManager.componentName'),

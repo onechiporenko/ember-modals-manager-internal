@@ -1,5 +1,5 @@
 import Base from './base';
-import {computed, get, set} from '@ember/object';
+import {action, computed, get, set} from '@ember/object';
 import {alias} from '@ember/object/computed';
 import {later} from '@ember/runloop';
 import {A} from '@ember/array';
@@ -12,7 +12,7 @@ import {run} from '@ember/runloop';
  * @namespace Components
  * @extends Components.BaseModal
  */
-export default Base.extend({
+export default class ProgressModal extends Base {
 
   /**
    * Number of fulfilled promises
@@ -20,9 +20,9 @@ export default Base.extend({
    * @property done
    * @type number
    * @default 0
-   * @private
+   * @protected
    */
-  done: 0,
+  done = 0;
 
   /**
    * Number of promises
@@ -33,45 +33,42 @@ export default Base.extend({
    * @property promisesCount
    * @type number
    * @default 0
-   * @private
+   * @protected
    */
-  promisesCount: 0,
+  promisesCount = 0;
 
   /**
    * @property canceled
    * @type boolean
    * @default false
    */
-  canceled: false,
+  canceled = false;
 
   /**
    * @property settled
    * @type boolean
    * @default false
-   * @private
+   * @protected
    * @readonly
    */
-  settled: alias('options.settled'),
+  @alias('options.settled')
+  settled;
 
   /**
    * @property errors
    * @type array
    * @default []
-   * @private
+   * @protected
    */
-  errors: computed(function () {
-    return A([]);
-  }),
+  errors = A([]);
 
   /**
    * @property results
    * @type array
    * @default []
-   * @private
+   * @protected
    */
-  results: computed(function () {
-    return A([]);
-  }),
+  results = A([]);
 
   /**
    * List of promises to fulfill
@@ -79,32 +76,33 @@ export default Base.extend({
    * @property promises
    * @type {Promise[]}
    * @default null
-   * @private
+   * @protected
    * @readonly
    */
-  promises: alias('options.promises'),
+  @alias('options.promises')
+  promises;
 
   /**
    * @property progress
    * @type number
    * @default 0
-   * @private
+   * @protected
    * @readonly
    */
-  progress: computed('done', 'promisesCount', function () {
+  @computed('done', 'promisesCount')
+  get progress () {
     const done = get(this, 'done');
     const promisesCount = get(this, 'promisesCount');
     if (!promisesCount) {
       return 100;
     }
     return done / promisesCount * 100;
-  }),
+  }
 
-  actions: {
-    cancel() {
-      set(this, 'canceled', true);
-    }
-  },
+  @action
+  cancel() {
+    set(this, 'canceled', true);
+  }
 
   didInsertElement() {
     const promises = get(this, 'promises');
@@ -112,12 +110,12 @@ export default Base.extend({
     if (promises && promises.length) {
       this.next(get(this, 'promises').shift());
     }
-  },
+  }
 
   /**
    * @method next
    * @param {PromiseFactory} promiseFactory
-   * @private
+   * @protected
    */
   next(promiseFactory) {
     if (get(this, 'canceled')) {
@@ -138,7 +136,7 @@ export default Base.extend({
         }
         return error;
       });
-  },
+  }
 
   _next(result) {
     run(() => {
@@ -155,7 +153,7 @@ export default Base.extend({
       // wait for last "tick" animation
       this._complete();
     }
-  },
+  }
 
   _complete() {
     const settled = get(this, 'settled');
@@ -164,4 +162,4 @@ export default Base.extend({
     later(() => this.send('confirm', settled ? [results, errors] : results), 500);
   }
 
-});
+}

@@ -8,16 +8,17 @@ import {computed, get} from '@ember/object';
  * @namespace Components
  * @extends Components.PromptModal
  */
-export default PromptModal.extend({
+export default class PromptConfirmModal extends PromptModal {
 
   /**
    * @property confirmDisabled
    * @type boolean
    * @default true
-   * @private
+   * @protected
    * @readonly
    */
-  confirmDisabled: computed('promptValue', 'options.promptValue', function () {
+  @computed('promptValue', 'options.promptValue')
+  get confirmDisabled () {
     return get(this, 'promptValue') !== get(this, 'options.promptValue');
-  })
-});
+  }
+}

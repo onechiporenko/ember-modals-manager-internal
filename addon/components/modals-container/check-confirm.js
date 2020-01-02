@@ -8,32 +8,33 @@ import {not} from '@ember/object/computed';
  * @namespace Components
  * @extends Components.PromptModal
  */
-export default PromptModal.extend({
+export default class CheckConfirmModal extends PromptModal {
 
   /**
    * @property promptValue
    * @type boolean
    * @default false
-   * @private
+   * @protected
    * @readonly
    */
-  promptValue: false,
+  promptValue = false;
 
   /**
    * @property simplifiedInput
    * @type boolean
    * @default true
-   * @private
+   * @protected
    * @readonly
    */
-  simplifiedInput: true,
+  simplifiedInput = true;
 
   /**
    * @property confirmDisabled
    * @type boolean
    * @default true
-   * @private
+   * @protected
    * @readonly
    */
-  confirmDisabled: not('promptValue')
-});
+  @not('promptValue')
+  confirmDisabled;
+}
