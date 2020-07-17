@@ -1,9 +1,11 @@
 {
   "name": "ember-modals-manager-internal",
   "version": "2.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "Internal addon for modals-managers.",
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "modal",
+    "service"
   ],
   "repository": "https://github.com/onechiporenko/ember-modals-manager-internal",
   "license": "MIT",
