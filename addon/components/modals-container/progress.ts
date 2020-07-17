@@ -61,7 +61,7 @@ export default class ProgressModal<T> extends Base {
     set(this, 'promisesCount', this.promises.length);
     const promise = this.promises.shift();
     if (promise) {
-      this.next(promise);
+      void this.next(promise);
     }
   }
 
@@ -70,11 +70,11 @@ export default class ProgressModal<T> extends Base {
       return this._complete();
     }
     return promiseFactory()
-      .then(result => {
+      .then((result: T) => {
         this._next(result);
         return result;
       })
-      .catch(error => {
+      .catch(<EmmiDeclinePayload>(error: EmmiDeclinePayload): EmmiDeclinePayload => {
         if (this.settled) {
           this.errors.pushObject(error);
           this._next();
@@ -94,7 +94,7 @@ export default class ProgressModal<T> extends Base {
     });
     const promise = this.promises.shift();
     if (promise) {
-      this.next(promise);
+      void this.next(promise);
     } else {
       // wait for last "tick" animation
       this._complete();

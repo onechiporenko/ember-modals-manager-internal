@@ -28,19 +28,19 @@ export function getCustomModalText(selectorsMap: {[key: string]: string}): (a: A
   }
 }
 
-export async function lastLogMessageAssert(assert: Assert, msg: string): Promise<void> {
-  const lastLogMsg = await find('.logs')?.innerHTML?.split('<br>').slice(0, -1).pop()?.trim();
+export function lastLogMessageAssert(assert: Assert, msg: string): void {
+  const lastLogMsg = find('.logs')?.innerHTML?.split('<br>').slice(0, -1).pop()?.trim();
   assert.equal(lastLogMsg, msg);
 }
 
 export function getModalIsOpened(selector: string): (a: Assert, e: boolean) => void {
-  return async function (assert: Assert, expected: boolean): Promise<void> {
+  return function (assert: Assert, expected: boolean): void {
     if (expected) {
-      const modals = await find(selector);
+      const modals = find(selector);
       assert.ok(!!modals, 'modal is opened');
     }
     else {
-      const modals = await find(selector);
+      const modals = find(selector);
       assert.notOk(!!modals, 'modal is not opened');
     }
   }
