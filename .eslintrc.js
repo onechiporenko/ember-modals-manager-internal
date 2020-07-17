@@ -1,6 +1,8 @@
+'use strict';
+
 module.exports = {
   root: true,
-  parser: 'babel-eslint',
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module',
@@ -9,10 +11,12 @@ module.exports = {
     }
   },
   plugins: [
+    '@typescript-eslint',
     'ember'
   ],
   extends: [
     'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
     'plugin:ember/recommended'
   ],
   env: {
@@ -28,9 +32,9 @@ module.exports = {
         '.eslintrc.js',
         '.template-lintrc.js',
         'ember-cli-build.js',
-        'index.js',
+        'index.ts',
         'testem.js',
-        'blueprints/*/index.js',
+        'blueprints/*/index.ts',
         'config/**/*.js',
         'tests/dummy/config/**/*.js'
       ],

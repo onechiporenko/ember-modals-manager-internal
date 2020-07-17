@@ -1,5 +1,5 @@
 import PromptModal from './prompt';
-import {computed, get} from '@ember/object';
+import { computed } from '@ember/object';
 
 /**
  * Prompt-confirm-modal
@@ -10,15 +10,8 @@ import {computed, get} from '@ember/object';
  */
 export default class PromptConfirmModal extends PromptModal {
 
-  /**
-   * @property confirmDisabled
-   * @type boolean
-   * @default true
-   * @protected
-   * @readonly
-   */
   @computed('promptValue', 'options.promptValue')
-  get confirmDisabled () {
-    return get(this, 'promptValue') !== get(this, 'options.promptValue');
+  get confirmDisabled(): boolean {
+    return this.promptValue !== this.options.promptValue;
   }
 }
