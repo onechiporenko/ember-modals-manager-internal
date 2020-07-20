@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import { layout as templateLayout } from '@ember-decorators/component';
-import layout from 'ember-modals-manager-internal/templates/components/modals-container';
+import layout from 'ember-modals-manager-internal/templates/components/emmi-modals-container';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 import { readOnly } from '@ember/object/computed';
