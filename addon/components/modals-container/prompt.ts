@@ -1,7 +1,7 @@
 import BaseModal from './base';
 import { action, computed, set } from '@ember/object';
 import { isEmpty } from '@ember/utils';
-import { EmmiConfirmPayload } from 'dummy';
+import { EmmiConfirmPayload } from 'ember-modals-manager-internal';
 
 /**
  * Prompt-modal

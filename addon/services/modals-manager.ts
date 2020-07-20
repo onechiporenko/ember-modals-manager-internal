@@ -3,7 +3,7 @@ import { assert } from '@ember/debug';
 import Service from '@ember/service';
 import { isArray } from '@ember/array';
 import RSVP, { defer } from 'rsvp';
-import { EmmiConfirmPayload, EmmiDeclinePayload, EmmiModalOptions } from 'dummy';
+import { EmmiConfirmPayload, EmmiDeclinePayload, EmmiModalOptions } from 'ember-modals-manager-internal';
 
 export default class ModalsManager<T> extends Service {
 

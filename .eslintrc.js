@@ -11,12 +11,10 @@ module.exports = {
     }
   },
   plugins: [
-    '@typescript-eslint',
     'ember'
   ],
   extends: [
     'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
     'plugin:ember/recommended'
   ],
   env: {
@@ -26,13 +24,26 @@ module.exports = {
     'ember/no-jquery': 'error'
   },
   overrides: [
+    // ts files
+    {
+      files: ['*.ts', '*.tsx'],
+      plugins: [
+        '@typescript-eslint',
+        'ember'
+      ],
+      extends: [
+        'eslint:recommended',
+        'plugin:@typescript-eslint/recommended',
+        'plugin:ember/recommended'
+      ]
+    },
     // node files
     {
       files: [
         '.eslintrc.js',
         '.template-lintrc.js',
         'ember-cli-build.js',
-        'index.ts',
+        'index.js',
         'testem.js',
         'blueprints/*/index.ts',
         'config/**/*.js',
@@ -52,9 +63,7 @@ module.exports = {
         node: true
       },
       plugins: ['node'],
-      rules: Object.assign({}, require('eslint-plugin-node').configs.recommended.rules, {
-        // add your custom rules and overrides for node files here
-      })
+      extends: ['plugin:node/recommended']
     }
   ]
 };

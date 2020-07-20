@@ -5,7 +5,7 @@ import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 import { readOnly } from '@ember/object/computed';
 import ModalsManager from 'ember-modals-manager-internal/services/modals-manager';
-import { EmmiConfirmPayload, EmmiDeclinePayload, EmmiModalOptions } from 'dummy';
+import { EmmiConfirmPayload, EmmiDeclinePayload, EmmiModalOptions } from 'ember-modals-manager-internal';
 
 /**
  * You should place this component in the `application.hbs`:

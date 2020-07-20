@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import {action} from '@ember/object';
-import { EmmiConfirmPayload, EmmiDeclinePayload, EmmiModalOptions } from 'dummy';
+import { EmmiConfirmPayload, EmmiDeclinePayload, EmmiModalOptions } from 'ember-modals-manager-internal';
 
 /**
  * Base Components for modals. All of them extends this one

@@ -1,5 +1,5 @@
 import Base from './base';
-import { EmmiConfirmPayload, EmmiDeclinePayload } from 'dummy';
+import { EmmiConfirmPayload, EmmiDeclinePayload } from 'ember-modals-manager-internal';
 
 /**
  * Here `process` means function thar return Promise

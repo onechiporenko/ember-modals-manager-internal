@@ -4,8 +4,8 @@ import { readOnly } from '@ember/object/computed';
 import { later } from '@ember/runloop';
 import { A } from '@ember/array';
 import { run } from '@ember/runloop';
-import { EmmiConfirmPayload, EmmiDeclinePayload, EmmiPromiseFactory } from 'dummy';
 import RSVP from 'rsvp';
+import { EmmiConfirmPayload, EmmiDeclinePayload, EmmiPromiseFactory } from 'ember-modals-manager-internal';
 
 /**
  * Here `promises` means functions that return Promise
