@@ -4,7 +4,7 @@ import layout from 'ember-modals-manager-internal/templates/components/modals-co
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 import { readOnly } from '@ember/object/computed';
-import ModalsManager from 'ember-modals-manager-internal/services/modals-manager';
+import ModalsManager from 'ember-modals-manager-internal/services/emmi-modals-manager';
 import { EmmiConfirmPayload, EmmiDeclinePayload, EmmiModalOptions } from 'ember-modals-manager-internal';
 
 /**

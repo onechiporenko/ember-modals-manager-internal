@@ -39,21 +39,21 @@ export default class ModalsManager<T> extends Service {
    * Shows `alert`-modal
    */
   alert(options: EmmiModalOptions): RSVP.Promise<T> {
-    return this.show('modals-container/alert', options);
+    return this.show('emmi-emmi-modals-container/alert', options);
   }
 
   /**
    * Shows `confirm`-modal
    */
   confirm(options: EmmiModalOptions): RSVP.Promise<T> {
-    return this.show('modals-container/confirm', options);
+    return this.show('emmi-emmi-modals-container/confirm', options);
   }
 
   /**
    * Shows `prompt`-modal
    */
   prompt(options: EmmiModalOptions): RSVP.Promise<T> {
-    return this.show('modals-container/prompt', options);
+    return this.show('emmi-emmi-modals-container/prompt', options);
   }
 
   /**
@@ -61,14 +61,14 @@ export default class ModalsManager<T> extends Service {
    */
   promptConfirm(options: EmmiModalOptions): RSVP.Promise<T> {
     assert('"options.promptValue" must be defined and not empty', !!options.promptValue);
-    return this.show('modals-container/prompt-confirm', options);
+    return this.show('emmi-emmi-modals-container/prompt-confirm', options);
   }
 
   /**
    * Show `check-confirm`-modal
    */
   checkConfirm(options: EmmiModalOptions): RSVP.Promise<T> {
-    return this.show('modals-container/check-confirm', options);
+    return this.show('emmi-emmi-modals-container/check-confirm', options);
   }
 
   /**
@@ -76,12 +76,12 @@ export default class ModalsManager<T> extends Service {
    */
   progress(options: EmmiModalOptions): RSVP.Promise<T> {
     assert('`options.promises` must be an array', options && isArray(options.promises));
-    return this.show('modals-container/progress', options);
+    return this.show('emmi-emmi-modals-container/progress', options);
   }
 
   process(options: EmmiModalOptions): RSVP.Promise<T> {
     assert('`options.process` must be defined', options && options.process);
-    return this.show('modals-container/process', options);
+    return this.show('emmi-emmi-modals-container/process', options);
   }
 
   onConfirmClick(v: EmmiConfirmPayload): void {
