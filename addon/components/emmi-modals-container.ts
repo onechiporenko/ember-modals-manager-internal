@@ -4,18 +4,11 @@ import layout from 'ember-modals-manager-internal/templates/components/emmi-moda
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 import { readOnly } from '@ember/object/computed';
-import ModalsManager from 'ember-modals-manager-internal/services/emmi-modals-manager';
-import { EmmiConfirmPayload, EmmiDeclinePayload, EmmiModalOptions } from 'ember-modals-manager-internal';
+import ModalsManager, {
+  EmmiConfirmPayload, EmmiDeclinePayload,
+  EmmiModalOptions
+} from '../services/emmi-modals-manager';
 
-/**
- * You should place this component in the `application.hbs`:
- *
- * ```hbs
- * <ModalsContainer/>
- * ```
- *
- * That's all what you have to do with it
- */
 @templateLayout(layout)
 class ModalsContainer<T> extends Component {
 

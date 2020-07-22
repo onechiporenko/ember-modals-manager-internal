@@ -3,7 +3,27 @@ import { assert } from '@ember/debug';
 import Service from '@ember/service';
 import { isArray } from '@ember/array';
 import RSVP, { defer } from 'rsvp';
-import { EmmiConfirmPayload, EmmiDeclinePayload, EmmiModalOptions } from 'ember-modals-manager-internal';
+
+export declare type EmmiPromiseFactory = () => RSVP.Promise<any>; // eslint-disable-line @typescript-eslint/no-explicit-any
+export declare type EmmiConfirmPayload = any; // eslint-disable-line @typescript-eslint/no-explicit-any
+export declare type EmmiDeclinePayload = any; // eslint-disable-line @typescript-eslint/no-explicit-any
+
+export declare interface EmmiModalOptions {
+  title?: string;
+  titleComponent?: string;
+  body?: string;
+  bodyComponent?: string;
+  footer?: string;
+  footerComponent?: string;
+  confirm?: string;
+  decline?: string;
+  cancel?: string;
+  promptValue?: string;
+  process?: EmmiPromiseFactory;
+  promises?: EmmiPromiseFactory[];
+  settled?: boolean;
+  disallowEmpty?: boolean;
+}
 
 export default class ModalsManager<T> extends Service {
 

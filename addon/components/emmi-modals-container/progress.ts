@@ -5,7 +5,11 @@ import { later } from '@ember/runloop';
 import { A } from '@ember/array';
 import { run } from '@ember/runloop';
 import RSVP from 'rsvp';
-import { EmmiConfirmPayload, EmmiDeclinePayload, EmmiPromiseFactory } from 'ember-modals-manager-internal';
+import {
+  EmmiConfirmPayload,
+  EmmiDeclinePayload,
+  EmmiPromiseFactory
+} from '../../services/emmi-modals-manager';
 
 /**
  * Here `promises` means functions that return Promise
