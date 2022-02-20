@@ -1,28 +1,27 @@
-import Component from '@ember/component';
-import { layout as templateLayout } from '@ember-decorators/component';
-import layout from 'ember-modals-manager-internal/templates/components/emmi-modals-container';
+import Component from '@glimmer/component';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
-import { readOnly } from '@ember/object/computed';
 import ModalsManager, {
-  EmmiConfirmPayload, EmmiDeclinePayload,
-  EmmiModalOptions
+  EmmiConfirmPayload,
+  EmmiDeclinePayload,
+  EmmiModalOptions,
 } from '../services/emmi-modals-manager';
 
-@templateLayout(layout)
 class ModalsContainer<T> extends Component {
-
   @service
   protected modalsManager: ModalsManager<T>;
 
-  @readOnly('modalsManager.options')
-  protected readonly options: EmmiModalOptions;
+  protected get options(): EmmiModalOptions {
+    return this.modalsManager.options;
+  }
 
-  @readOnly('modalsManager.modalIsOpened')
-  protected readonly modalIsOpened: boolean;
+  protected get modalIsOpened(): boolean {
+    return this.modalsManager.modalIsOpened;
+  }
 
-  @readOnly('modalsManager.componentName')
-  protected readonly componentName: string;
+  protected get componentName(): string | null {
+    return this.modalsManager.componentName;
+  }
 
   @action
   confirm(v: EmmiConfirmPayload): void {

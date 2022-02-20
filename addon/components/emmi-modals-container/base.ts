@@ -1,16 +1,15 @@
-import Component from '@ember/component';
-import {action} from '@ember/object';
+import Component from '@glimmer/component';
+import { action } from '@ember/object';
 import {
   EmmiConfirmPayload,
   EmmiDeclinePayload,
-  EmmiModalOptions
+  EmmiModalOptions,
 } from '../../services/emmi-modals-manager';
 
 /**
  * Base Components for modals. All of them extends this one
  */
 export default class BaseModal extends Component {
-
   protected modalIsOpened = false;
 
   protected options: EmmiModalOptions = {} as EmmiModalOptions;

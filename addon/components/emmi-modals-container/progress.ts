@@ -1,6 +1,6 @@
+import { tracked } from '@glimmer/tracking';
 import Base from './base';
-import { action, computed, set } from '@ember/object';
-import { readOnly } from '@ember/object/computed';
+import { action, set } from '@ember/object';
 import { later } from '@ember/runloop';
 import { A } from '@ember/array';
 import { run } from '@ember/runloop';
@@ -8,7 +8,7 @@ import RSVP from 'rsvp';
 import {
   EmmiConfirmPayload,
   EmmiDeclinePayload,
-  EmmiPromiseFactory
+  EmmiPromiseFactory,
 } from '../../services/emmi-modals-manager';
 
 /**
@@ -19,10 +19,10 @@ import {
  * @extends Components.BaseModal
  */
 export default class ProgressModal<T> extends Base {
-
   /**
    * Number of fulfilled promises
    */
+  @tracked
   done = 0;
 
   /**
@@ -31,12 +31,14 @@ export default class ProgressModal<T> extends Base {
    * This value is set initially and must be used instead of `promises.length`,
    * because `promises`-array is changed while execution
    */
+  @tracked
   promisesCount = 0;
 
   canceled = false;
 
-  @readOnly('options.settled')
-  protected readonly settled: boolean;
+  protected get settled(): boolean | undefined {
+    return this.options.settled;
+  }
 
   protected errors = A<EmmiDeclinePayload>([]);
 
@@ -45,15 +47,15 @@ export default class ProgressModal<T> extends Base {
   /**
    * List of promises to fulfill
    */
-  @readOnly('options.promises')
-  protected readonly promises: EmmiPromiseFactory[];
+  protected get promises(): EmmiPromiseFactory[] | undefined {
+    return this.options.promises;
+  }
 
-  @computed('done', 'promisesCount')
   get progress(): number {
     if (!this.promisesCount) {
       return 100;
     }
-    return this.done / this.promisesCount * 100;
+    return (this.done / this.promisesCount) * 100;
   }
 
   @action
@@ -62,8 +64,9 @@ export default class ProgressModal<T> extends Base {
   }
 
   didInsertElement(): void {
-    set(this, 'promisesCount', this.promises.length);
-    const promise = this.promises.shift();
+    const promises = this.options.promises || [];
+    this.promisesCount = promises.length;
+    const promise = promises.shift();
     if (promise) {
       void this.next(promise);
     }
@@ -78,25 +81,28 @@ export default class ProgressModal<T> extends Base {
         this._next(result);
         return result;
       })
-      .catch(<EmmiDeclinePayload>(error: EmmiDeclinePayload): EmmiDeclinePayload => {
-        if (this.settled) {
-          this.errors.pushObject(error);
-          this._next();
-        } else {
-          this.send('decline', [this.results, error]);
+      .catch(
+        <EmmiDeclinePayload>(error: EmmiDeclinePayload): EmmiDeclinePayload => {
+          if (this.settled) {
+            this.errors.pushObject(error);
+            this._next();
+          } else {
+            this.send('decline', [this.results, error]);
+          }
+          return error;
         }
-        return error;
-      });
+      );
   }
 
   _next(result?: EmmiConfirmPayload): void {
+    const promises = this.options.promises || [];
     run(() => {
       if (arguments.length === 1) {
         this.results.pushObject(result);
       }
-      this.incrementProperty('done');
+      this.done++;
     });
-    const promise = this.promises.shift();
+    const promise = promises.shift();
     if (promise) {
       void this.next(promise);
     } else {
@@ -106,7 +112,13 @@ export default class ProgressModal<T> extends Base {
   }
 
   _complete(): void {
-    later(() => this.send('confirm', this.settled ? [this.results, this.errors] : this.results), 500);
+    later(
+      () =>
+        this.send(
+          'confirm',
+          this.settled ? [this.results, this.errors] : this.results
+        ),
+      500
+    );
   }
-
 }

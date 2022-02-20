@@ -26,7 +26,6 @@ export declare interface EmmiModalOptions {
 }
 
 export default class ModalsManager<T> extends Service {
-
   modalIsOpened = false;
 
   modalsContainerPath = 'emmi-modals-container';
@@ -39,7 +38,7 @@ export default class ModalsManager<T> extends Service {
     footer: '',
     confirm: 'Yes',
     decline: 'No',
-    cancel: 'Cancel'
+    cancel: 'Cancel',
   };
 
   options: EmmiModalOptions = {} as EmmiModalOptions;
@@ -47,7 +46,10 @@ export default class ModalsManager<T> extends Service {
   componentName: string | null = null;
 
   show(componentName: string, options: EmmiModalOptions): RSVP.Promise<T> {
-    assert('Only one modal may be opened in the same time!', !this.modalIsOpened);
+    assert(
+      'Only one modal may be opened in the same time!',
+      !this.modalIsOpened
+    );
     const opts = Object.assign({}, this.defaultOptions, options);
     set(this, 'modalIsOpened', true);
     set(this, 'options', opts);
@@ -82,7 +84,10 @@ export default class ModalsManager<T> extends Service {
    * Shows `prompt-confirm`-modal
    */
   promptConfirm(options: EmmiModalOptions): RSVP.Promise<T> {
-    assert('"options.promptValue" must be defined and not empty', !!options.promptValue);
+    assert(
+      '"options.promptValue" must be defined and not empty',
+      !!options.promptValue
+    );
     return this.show(`${this.modalsContainerPath}/prompt-confirm`, options);
   }
 
@@ -97,7 +102,10 @@ export default class ModalsManager<T> extends Service {
    * Shows `progress`-modal. This modal doesn't have any controls and is auto-closed when progress is completed
    */
   progress(options: EmmiModalOptions): RSVP.Promise<T> {
-    assert('`options.promises` must be an array', options && isArray(options.promises));
+    assert(
+      '`options.promises` must be an array',
+      options && isArray(options.promises)
+    );
     return this.show(`${this.modalsContainerPath}/progress`, options);
   }
 
