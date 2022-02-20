@@ -16,8 +16,8 @@ export default class ProcessModal extends Base {
     const process = this.options.process;
     if (process) {
       process()
-        .then((v: EmmiConfirmPayload): void => this.send('confirm', v))
-        .catch((e: EmmiDeclinePayload): void => this.send('decline', e));
+        .then((v: EmmiConfirmPayload): void => this.confirm(v))
+        .catch((e: EmmiDeclinePayload): void => this.decline(e));
     }
   }
 }

@@ -15,10 +15,6 @@ class ModalsContainer<T> extends Component {
     return this.modalsManager.options;
   }
 
-  protected get modalIsOpened(): boolean {
-    return this.modalsManager.modalIsOpened;
-  }
-
   protected get componentName(): string | null {
     return this.modalsManager.componentName;
   }
