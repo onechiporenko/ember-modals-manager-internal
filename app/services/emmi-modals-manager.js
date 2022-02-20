@@ -1,1 +1,1 @@
-export { default } from 'ember-modals-manager-internal/services/modals-manager';
+export { default } from 'ember-modals-manager-internal/services/emmi-modals-manager';
