@@ -1,10 +1,9 @@
 import { tracked } from '@glimmer/tracking';
-import Base from './base';
 import { action, set } from '@ember/object';
-import { later } from '@ember/runloop';
+import { later, run } from '@ember/runloop';
 import { A } from '@ember/array';
-import { run } from '@ember/runloop';
 import RSVP from 'rsvp';
+import Base from './base';
 import {
   EmmiConfirmPayload,
   EmmiDeclinePayload,
@@ -87,7 +86,7 @@ export default class ProgressModal<T> extends Base {
             this.errors.pushObject(error);
             this._next();
           } else {
-            this.send('decline', [this.results, error]);
+            this.decline([this.results, error]);
           }
           return error;
         }
@@ -114,10 +113,7 @@ export default class ProgressModal<T> extends Base {
   _complete(): void {
     later(
       () =>
-        this.send(
-          'confirm',
-          this.settled ? [this.results, this.errors] : this.results
-        ),
+        this.confirm(this.settled ? [this.results, this.errors] : this.results),
       500
     );
   }
