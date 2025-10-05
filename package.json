@@ -45,7 +45,7 @@
     "@babel/plugin-proposal-decorators": "^7.28.0",
     "@ember/optional-features": "^2.2.0",
     "@ember/test-helpers": "^5.2.2",
-    "@embroider/macros": "^1.18.1",
+    "@embroider/macros": "^1.18.0",
     "@embroider/test-setup": "^4.0.0",
     "@eslint/js": "^9.35.0",
     "@glimmer/component": "^2.0.0",
@@ -106,8 +106,6 @@
     "qunit-dom": "^3.5.0",
     "stylelint": "^16.23.1",
     "stylelint-config-standard": "^36.0.1",
-    "stylelint-prettier": "^5.0.3",
-    "stylelint-scss": "^6.0.0",
     "typescript": "^5.9.2",
     "typescript-eslint": "^8.42.0",
     "webpack": "^5.101.3"
