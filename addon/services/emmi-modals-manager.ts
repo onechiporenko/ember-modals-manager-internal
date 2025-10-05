@@ -1,7 +1,7 @@
-import { set } from '@ember/object';
-import { assert } from '@ember/debug';
-import Service from '@ember/service';
 import { isArray } from '@ember/array';
+import { assert } from '@ember/debug';
+import { set } from '@ember/object';
+import Service from '@ember/service';
 import RSVP, { defer } from 'rsvp';
 
 export declare type EmmiPromiseFactory = () => RSVP.Promise<any>; // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -48,7 +48,7 @@ export default class ModalsManager<T> extends Service {
   show(componentName: string, options: EmmiModalOptions): RSVP.Promise<T> {
     assert(
       'Only one modal may be opened in the same time!',
-      !this.modalIsOpened
+      !this.modalIsOpened,
     );
     const opts = Object.assign({}, this.defaultOptions, options);
     set(this, 'modalIsOpened', true);
@@ -86,7 +86,7 @@ export default class ModalsManager<T> extends Service {
   promptConfirm(options: EmmiModalOptions): RSVP.Promise<T> {
     assert(
       '"options.promptValue" must be defined and not empty',
-      !!options.promptValue
+      !!options.promptValue,
     );
     return this.show(`${this.modalsContainerPath}/prompt-confirm`, options);
   }
@@ -104,7 +104,7 @@ export default class ModalsManager<T> extends Service {
   progress(options: EmmiModalOptions): RSVP.Promise<T> {
     assert(
       '`options.promises` must be an array',
-      options && isArray(options.promises)
+      options && isArray(options.promises),
     );
     return this.show(`${this.modalsContainerPath}/progress`, options);
   }

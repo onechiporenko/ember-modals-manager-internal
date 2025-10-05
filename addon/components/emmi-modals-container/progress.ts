@@ -1,14 +1,16 @@
-import { tracked } from '@glimmer/tracking';
+/* eslint-disable ember/no-runloop */
+import { A } from '@ember/array';
 import { action, set } from '@ember/object';
 import { later, run } from '@ember/runloop';
-import { A } from '@ember/array';
+import { tracked } from '@glimmer/tracking';
 import RSVP from 'rsvp';
-import Base from './base';
+
 import {
   EmmiConfirmPayload,
   EmmiDeclinePayload,
   EmmiPromiseFactory,
 } from '../../services/emmi-modals-manager';
+import Base from './base';
 
 /**
  * Here `promises` means functions that return Promise
@@ -89,7 +91,7 @@ export default class ProgressModal<T> extends Base {
             this.decline([this.results, error]);
           }
           return error;
-        }
+        },
       );
   }
 
@@ -114,7 +116,7 @@ export default class ProgressModal<T> extends Base {
     later(
       () =>
         this.confirm(this.settled ? [this.results, this.errors] : this.results),
-      500
+      500,
     );
   }
 }

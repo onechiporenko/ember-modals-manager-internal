@@ -1,8 +1,8 @@
-import Base from './base';
 import {
   EmmiConfirmPayload,
   EmmiDeclinePayload,
 } from '../../services/emmi-modals-manager';
+import Base from './base';
 
 /**
  * Here `process` means function thar return Promise

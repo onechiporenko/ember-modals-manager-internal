@@ -21,28 +21,13 @@
     "module": "es6",
     "experimentalDecorators": true,
     "paths": {
-      "dummy/tests/*": [
-        "tests/*"
-      ],
-      "dummy/*": [
-        "tests/dummy/app/*",
-        "app/*"
-      ],
-      "ember-modals-manager-internal": [
-        "addon"
-      ],
-      "ember-modals-manager-internal/*": [
-        "addon/*"
-      ],
-      "ember-modals-manager-internal/test-support": [
-        "addon-test-support"
-      ],
-      "ember-modals-manager-internal/test-support/*": [
-        "addon-test-support/*"
-      ],
-      "*": [
-        "types/*"
-      ]
+      "dummy/tests/*": ["tests/*"],
+      "dummy/*": ["tests/dummy/app/*", "app/*"],
+      "ember-modals-manager-internal": ["addon"],
+      "ember-modals-manager-internal/*": ["addon/*"],
+      "ember-modals-manager-internal/test-support": ["addon-test-support"],
+      "ember-modals-manager-internal/test-support/*": ["addon-test-support/*"],
+      "*": ["types/*"]
     }
   },
   "include": [

@@ -1,11 +1,15 @@
-import { click, find, fillIn } from '@ember/test-helpers';
+import { click, fillIn, find } from '@ember/test-helpers';
 
 export function getConfirmButtonState(
-  selector: string
+  selector: string,
 ): (a: Assert, s: boolean) => void {
   return function (assert: Assert, state: boolean): void {
     const btn = document.querySelector<HTMLButtonElement>(selector);
-    state ? assert.ok(btn?.disabled) : assert.ok(!btn?.disabled);
+    if (state) {
+      assert.ok(btn?.disabled);
+    } else {
+      assert.ok(!btn?.disabled);
+    }
   };
 }
 
@@ -40,7 +44,7 @@ export function lastLogMessageAssert(assert: Assert, msg: string): void {
 }
 
 export function getModalIsOpened(
-  selector: string
+  selector: string,
 ): (a: Assert, e: boolean) => void {
   return function (assert: Assert, expected: boolean): void {
     if (expected) {

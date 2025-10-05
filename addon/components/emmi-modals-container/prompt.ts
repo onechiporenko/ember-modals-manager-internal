@@ -1,8 +1,9 @@
-import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { isEmpty } from '@ember/utils';
-import BaseModal from './base';
+import { tracked } from '@glimmer/tracking';
+
 import { EmmiConfirmPayload } from '../../services/emmi-modals-manager';
+import BaseModal from './base';
 
 /**
  * Prompt-modal

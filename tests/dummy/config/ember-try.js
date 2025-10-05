@@ -5,20 +5,37 @@ const { embroiderSafe, embroiderOptimized } = require('@embroider/test-setup');
 
 module.exports = async function () {
   return {
+    packageManager: 'npm',
     scenarios: [
       {
-        name: 'ember-lts-3.24',
+        name: 'ember-lts-5.4',
         npm: {
           devDependencies: {
-            'ember-source': '~3.24.3',
+            'ember-source': '~5.4.0',
           },
         },
       },
       {
-        name: 'ember-lts-3.28',
+        name: 'ember-lts-5.8',
         npm: {
           devDependencies: {
-            'ember-source': '~3.28.0',
+            'ember-source': '~5.8.0',
+          },
+        },
+      },
+      {
+        name: 'ember-lts-5.12',
+        npm: {
+          devDependencies: {
+            'ember-source': '~5.12.0',
+          },
+        },
+      },
+      {
+        name: 'ember-lts-6.4',
+        npm: {
+          devDependencies: {
+            'ember-source': '~6.4.0',
           },
         },
       },
@@ -43,24 +60,6 @@ module.exports = async function () {
         npm: {
           devDependencies: {
             'ember-source': await getChannelURL('canary'),
-          },
-        },
-      },
-      {
-        name: 'ember-classic',
-        env: {
-          EMBER_OPTIONAL_FEATURES: JSON.stringify({
-            'application-template-wrapper': true,
-            'default-async-observers': false,
-            'template-only-glimmer-components': false,
-          }),
-        },
-        npm: {
-          devDependencies: {
-            'ember-source': '~3.28.0',
-          },
-          ember: {
-            edition: 'classic',
           },
         },
       },
